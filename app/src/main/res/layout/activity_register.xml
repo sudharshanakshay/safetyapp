@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_purple"
+    android:backgroundTint="@color/material_dynamic_primary80"
     android:orientation="vertical"
     tools:context=".Register">
 
 
-    <Button
-        android:id="@+id/update"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="326dp"
-        android:text="UPDATE"
-        android:textSize="20dp" />
+    <!--    <Button-->
+    <!--        android:id="@+id/update"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:layout_alignParentStart="true"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:layout_marginStart="57dp"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:layout_marginEnd="20dp"-->
+    <!--        android:layout_marginBottom="326dp"-->
+    <!--        android:text="UPDATE"-->
+    <!--        android:textSize="20dp" />-->
 
     <EditText
         android:id="@+id/name"
@@ -30,6 +32,7 @@
         android:layout_gravity="center"
         android:layout_marginEnd="91dp"
         android:layout_marginBottom="624dp"
+        android:fontFamily="monospace"
         android:hint="ENTER THE NAME"
         android:textSize="20dp" />
 
@@ -43,6 +46,7 @@
         android:layout_marginLeft="65dp"
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="542dp"
+        android:fontFamily="monospace"
         android:hint="ENTER PHONE NUMBER"
         android:textSize="20dp" />
 
@@ -57,6 +61,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="436dp"
+        android:fontFamily="monospace"
         android:text="ADD"
         android:textSize="20dp" />
 
@@ -70,6 +75,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="62dp"
         android:layout_marginBottom="435dp"
+        android:fontFamily="monospace"
         android:text="DELETE"
         android:textSize="20dp" />
 
@@ -80,8 +86,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="51dp"
-        android:layout_marginBottom="326dp"
+        android:layout_marginEnd="157dp"
+        android:layout_marginBottom="337dp"
+        android:background="@color/purple_500"
+        android:fontFamily="monospace"
         android:text="VIEW"
         android:textSize="20dp" />
 
