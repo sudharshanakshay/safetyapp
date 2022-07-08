@@ -18,9 +18,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.contacts.Models.ContactModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -79,8 +82,6 @@ public class MainActivity extends AppCompatActivity {
                                 latitude = location.getLatitude();
                                 longitude = location.getLongitude();
 
-
-
                                 longitudeTextView.setText(String.valueOf(longitude));
                                 latitudeTextView.setText(String.valueOf(latitude));
 
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.homeActivityToolbar);
         setSupportActionBar(myToolbar);
 
+        final DBHelper helper = new DBHelper(this);
+
         handleNsetLocation();
 
 
@@ -126,10 +129,6 @@ public class MainActivity extends AppCompatActivity {
         latitudeTextView = findViewById(R.id.latitudeTextView);
 
         SmsManager smsManager = SmsManager.getDefault();
-
-
-
-
 
         addcontact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,9 +141,24 @@ public class MainActivity extends AppCompatActivity {
         emergencyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                ArrayList<String> cellNo = new ArrayList<>();
+
+                ArrayList<ContactModel> contacts = helper.getContactsList();
+
+                for (int i=0; i<contacts.size(); i++){
+                   cellNo.add(contacts.get(i).getPhoneNumber());
+                }
+
+                System.out.println(cellNo);
+
                 updateLocation();
 //                smsManager.sendTextMessage("+91 98 804 38 931", null, String.valueOf(longitude)+"-"+String.valueOf(latitude)+"\n"+"hello from safety app !", null, null);
-                smsManager.sendTextMessage("+91 98 804 38 931", null,url+"\nEmergency\nMy last known location.", null, null);
+                for(String s : cellNo){
+                    smsManager.sendTextMessage(s, null,"hello", null, null);
+                }
+
+//                smsManager.sendTextMessage("+91 98 804 38 931", null,url+"\nEmergency\nMy last known location.", null, null);
             }
         });
     }
