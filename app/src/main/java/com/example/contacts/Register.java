@@ -38,7 +38,8 @@ public class Register extends AppCompatActivity {
         name = findViewById(R.id.name );
         phone= findViewById(R.id.phone );
         add= findViewById(R.id.add);
-        delete = findViewById(R.id.delete );update = findViewById(R.id.update );
+        delete = findViewById(R.id.delete );
+        update = findViewById(R.id.update);
         view = findViewById(R.id.view );
         DB = new DataBseHandler(this );
 
