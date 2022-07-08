@@ -56,6 +56,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase database = this.getWritableDatabase();
 
+
         Cursor cursor = database.rawQuery("Select id, name, phone from contacts", null);
 
         if(cursor.moveToFirst()) {
@@ -72,14 +73,31 @@ public class DBHelper extends SQLiteOpenHelper {
         return contacts;
     }
 
-    public int deleteContact(int contactId){
+    public int deleteAll(){
         SQLiteDatabase database = this.getWritableDatabase();
 
-        Cursor cursor = database.rawQuery("DELETE FROM contacts WHERE id=="+contactId, null);
-        System.out.println("---------------------------------");
-        System.out.println(cursor.toString());
-        System.out.println("---------------------------------");
+        Cursor cursor = database.rawQuery("DELETE FROM contacts", null);
         cursor.close();
+        database.close();
+        return 1;
+    }
+
+    public int deleteContact(ContactModel contactModel){
+        SQLiteDatabase database = this.getWritableDatabase();
+
+
+//        System.out.println("---------------------------------");
+//        System.out.println(array[0]);
+//        System.out.println("---------------------------------");
+
+        int a = database.delete("contacts", "id=?", new String[] {String.valueOf(contactModel.getContactId())} );
+
+        System.out.println(a);
+
+
+//        Cursor cursor = database.rawQuery("DELETE FROM contacts WHERE phone='"+id+"'", null);
+
+//        cursor.close();
         database.close();
         return 0;
     }

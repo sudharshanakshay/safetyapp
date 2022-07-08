@@ -13,6 +13,9 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -114,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        startActivity(new Intent(MainActivity.this, ContactsActivity.class));
+
+
         Toolbar myToolbar = findViewById(R.id.homeActivityToolbar);
         setSupportActionBar(myToolbar);
 
@@ -138,29 +144,55 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        emergencyBtn.setOnClickListener(new View.OnClickListener() {
+        emergencyBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public boolean onLongClick(View view) {
                 ArrayList<String> cellNo = new ArrayList<>();
 
                 ArrayList<ContactModel> contacts = helper.getContactsList();
 
                 for (int i=0; i<contacts.size(); i++){
-                   cellNo.add(contacts.get(i).getPhoneNumber());
+                    cellNo.add(contacts.get(i).getPhoneNumber());
                 }
 
                 System.out.println(cellNo);
 
                 updateLocation();
 //                smsManager.sendTextMessage("+91 98 804 38 931", null, String.valueOf(longitude)+"-"+String.valueOf(latitude)+"\n"+"hello from safety app !", null, null);
-                for(String s : cellNo){
-                    smsManager.sendTextMessage(s, null,"hello", null, null);
-                }
+//                for(String s : cellNo){
+//                    smsManager.sendTextMessage(s, null,"hello", null, null);
+//                }
 
 //                smsManager.sendTextMessage("+91 98 804 38 931", null,url+"\nEmergency\nMy last known location.", null, null);
+
+                smsManager.sendTextMessage("+91 9845842582", null,url+"\nEmergency\nMy last known location.", null, null);
+                return false;
             }
         });
+
+//        emergencyBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                ArrayList<String> cellNo = new ArrayList<>();
+//
+//                ArrayList<ContactModel> contacts = helper.getContactsList();
+//
+//                for (int i=0; i<contacts.size(); i++){
+//                   cellNo.add(contacts.get(i).getPhoneNumber());
+//                }
+//
+//                System.out.println(cellNo);
+//
+//                updateLocation();
+////                smsManager.sendTextMessage("+91 98 804 38 931", null, String.valueOf(longitude)+"-"+String.valueOf(latitude)+"\n"+"hello from safety app !", null, null);
+////                for(String s : cellNo){
+////                    smsManager.sendTextMessage(s, null,"hello", null, null);
+////                }
+//
+////                smsManager.sendTextMessage("+91 98 804 38 931", null,url+"\nEmergency\nMy last known location.", null, null);
+//            }
+//        });
     }
 
     @Override
@@ -185,5 +217,37 @@ public class MainActivity extends AppCompatActivity {
         }
         // Other 'case' lines to check for other
         // permissions this app might request.
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.app_bar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_settings:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+//
+            case R.id.action_locationHistory:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+                startActivity(new Intent(MainActivity.this, ContactsActivity.class));
+                return true;
+
+            case R.id.action_manage_contacts:
+
+                startActivity(new Intent(MainActivity.this, Register.class));
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

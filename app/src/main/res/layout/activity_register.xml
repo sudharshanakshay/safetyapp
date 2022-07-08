@@ -7,6 +7,17 @@
     android:orientation="vertical"
     tools:context=".Register">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/homeActivityToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/pink"
+        app:title="Manage Contacts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/update"

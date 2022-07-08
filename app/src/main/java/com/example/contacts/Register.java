@@ -1,17 +1,17 @@
 package com.example.contacts;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Activity;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.contacts.Adapters.ContactsViewAdapter;
 import com.example.contacts.Models.ContactModel;
@@ -25,13 +25,17 @@ public class Register extends AppCompatActivity {
     DataBseHandler DB;
     RecyclerView contactDisplayRecyclerView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_register);
+
+        Toolbar myToolbar = findViewById(R.id.homeActivityToolbar);
+        setSupportActionBar(myToolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         final DBHelper helper = new DBHelper(this);
 
@@ -78,6 +82,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 String phoneTXT = phone.getText().toString();
                 Boolean checkudeletedata = DB.deletedata(phoneTXT);
+
                 if(checkudeletedata==true)
                     Toast.makeText(Register.this, "Entry Deleted", Toast.LENGTH_SHORT).show();
                 else
@@ -91,18 +96,18 @@ public class Register extends AppCompatActivity {
 
                 ArrayList<ContactModel> contacts = helper.getContactsList();
 
-                System.out.println("---------------------------------");
-                System.out.println(contacts.get(0).getPhoneNumber());
-                System.out.println("---------------------------------");
+                try {
+                    System.out.println("---------------------------------");
+                    System.out.println(contacts.get(0).getPhoneNumber());
+                    System.out.println("---------------------------------");
+                }catch (Exception e){}
 
 
                 ContactsViewAdapter adapter = new ContactsViewAdapter(contacts, Register.this);
 
 //                binding.contactDisplayRecyclerView.setAdapter(adapter);
-//
 //                LinearLayoutManager layoutManager = new LinearLayoutManager(Register.this);
 //                binding.contactDisplayRecyclerView.setLayoutManager(layoutManager);
-
 
 
                 if(contacts.isEmpty()){
