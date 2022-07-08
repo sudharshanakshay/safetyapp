@@ -5,6 +5,11 @@
       <map>
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/contacts/app/src/main/res/layout/activity_main.xml" value="0.2223731884057971" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/contacts/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_contacts.xml" value="0.15260416666666668" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/contactdisplay.xml" value="0.14895833333333333" />
+        <entry key="app/src/main/res/layout/contactdisplaysample.xml" value="0.75" />
       </map>
     </option>
   </component>

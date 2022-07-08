@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,89 +10,102 @@
 
     <Button
         android:id="@+id/update"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="326dp"
         android:text="UPDATE"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/delete"
+        app:layout_constraintHorizontal_bias="0.767"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add"
+        app:layout_constraintVertical_bias="0.109" />
 
     <EditText
         android:id="@+id/name"
         android:layout_width="237dp"
         android:layout_height="64dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:layout_marginEnd="91dp"
-        android:layout_marginBottom="624dp"
+        android:layout_marginTop="64dp"
         android:hint="ENTER THE NAME"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/phone"
         android:layout_width="243dp"
         android:layout_height="66dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:layout_gravity="center"
-        android:layout_marginLeft="65dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="542dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
         android:hint="ENTER PHONE NUMBER"
-        android:textSize="20dp" />
-
+        android:inputType="phone"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <Button
         android:id="@+id/add"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="436dp"
+        android:layout_marginTop="32dp"
         android:text="ADD"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.767"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone"
+        app:layout_constraintVertical_bias="0.158" />
 
     <Button
         android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="62dp"
-        android:layout_marginBottom="435dp"
+        android:layout_marginEnd="72dp"
         android:text="DELETE"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintVertical_bias="0.109" />
 
     <Button
         android:id="@+id/view"
-        android:layout_width="112dp"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="51dp"
-        android:layout_marginBottom="326dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="72dp"
         android:text="VIEW"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone"
+        app:layout_constraintVertical_bias="0.158" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="62dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-16dp"
-        android:layout_marginBottom="170dp"
         android:text="TO DELETE A NUMBER ENTER THE NUMBER AND PRESS DELETE BUTTON"
         android:textAlignment="center"
-        android:textSize="20dp" />
-</RelativeLayout>
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

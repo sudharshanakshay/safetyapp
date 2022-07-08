@@ -1,0 +1,147 @@
+package com.example.contacts;
+
+import android.database.sqlite.SQLiteOpenHelper;
+import android.content.Context;
+import android.content.ContentValues;
+import android.database.Cursor;
+
+import androidx.annotation.Nullable;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.example.contacts.Models.ContactModel;
+
+import java.util.ArrayList;
+
+public class DBHelper extends SQLiteOpenHelper {
+
+    final static String DBNAME = "mydatabase.db";
+    final static int DBVERSION = 8;
+
+
+    public DBHelper(@Nullable Context context) {
+        super(context, DBNAME, null, DBVERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL(
+                "create table contacts" +
+                        "(id INTEGER primary key autoincrement," +
+                        "name TEXT," +
+                        "phone TEXT )"
+        );
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+//        sqLiteDatabase.execSQL("DROP table if exists orders");
+        onCreate(sqLiteDatabase);
+    }
+
+    public boolean insertIntoContacts(String name, String phone) {
+        SQLiteDatabase database = getReadableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put("name",name);
+        values.put("phone",phone);
+
+        long id = database.insert("contacts",null,values);
+
+        return id > 0;
+    }
+
+    public ArrayList<ContactModel> getContactsList() {
+        ArrayList<ContactModel> contacts = new ArrayList<>();
+
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        Cursor cursor = database.rawQuery("Select id, name, phone from contacts", null);
+
+        if(cursor.moveToFirst()) {
+            while(cursor.moveToNext()) {
+                ContactModel model = new ContactModel();
+                model.setContactId(cursor.getInt(0));
+                model.setContactName(cursor.getString(1)+ "");
+                model.setPhoneNumber(cursor.getString(2));
+                contacts.add(model);
+            }
+        }
+        cursor.close();
+        database.close();
+        return contacts;
+    }
+
+    public int deleteContact(int contactId){
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        Cursor cursor = database.rawQuery("DELETE FROM contacts WHERE id=="+contactId, null);
+        System.out.println("---------------------------------");
+        System.out.println(cursor.toString());
+        System.out.println("---------------------------------");
+        cursor.close();
+        database.close();
+        return 0;
+    }
+
+    public Cursor getOrderById(int id) {
+//        ArrayList<OrdersModel> orders = new ArrayList<>();
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery("Select * from orders where id =="+id, null);
+//        if(cursor.moveToFirst()) {
+//            while(cursor.moveToNext()) {
+//                OrdersModel model = new OrdersModel();
+//                model.setOrderNumber(cursor.getInt(0)+ "");
+//                model.setSoldItemName(cursor.getString(1));
+//                model.setOrderImage(cursor.getInt(2));
+//                model.setPrice(cursor.getInt(3) + "");
+//                orders.add(model);
+//            }
+//        }
+        if(cursor !=null)
+            cursor.moveToFirst();
+//        cursor.close();
+//        database.close();
+        return cursor;
+    }
+
+
+    public boolean updateOrder(String name,String phone,int price,int image,String desc,String foodName,int quantity,int id) {
+        SQLiteDatabase database = getReadableDatabase();
+        ContentValues values =new ContentValues();
+
+        /*
+        id = 0
+        name = 1
+        phone =2
+        price =3
+        image = 4
+        desc = 5
+        foodname = 6
+        quantity = 7
+         */
+        values.put("name",name);
+        values.put("phone",phone);
+        values.put("price",price);
+        values.put("image",image);
+
+        values.put("description",desc);
+        values.put("foodname",foodName);
+        values.put("quantity",quantity);
+
+        long row = database.update("orders",values,"id="+id,null);
+        if(row <=0){
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+
+    public int deleteOrder(String id) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        return database.delete("orders","id="+id,null);
+
+    }
+}
