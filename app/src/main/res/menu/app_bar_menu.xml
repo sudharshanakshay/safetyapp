@@ -11,8 +11,5 @@
         android:title="@string/action_settings"
         app:showAsAction="never"/>
 
-    <item android:id="@+id/action_locationHistory"
-        android:title="@string/action_locationHistory"
-        app:showAsAction="never"/>
 
 </menu>

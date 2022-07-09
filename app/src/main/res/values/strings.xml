@@ -7,6 +7,7 @@
     <string name="action_select_all">select all</string>
     <string name="action_manage_contacts">Manage Contacts</string>
     <string name="action_add_contacts">Add Contacts</string>
+    <string name="action_save_contact">Save</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

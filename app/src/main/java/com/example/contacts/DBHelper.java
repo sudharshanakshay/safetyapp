@@ -43,12 +43,25 @@ public class DBHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
 
-        values.put("name",name);
-        values.put("phone",phone);
 
-        long id = database.insert("contacts",null,values);
+        if(name.length() >= 1 && phone.length() >= 1){
 
-        return id > 0;
+            values.put("name",name);
+            values.put("phone",phone);
+            long id = database.insert("contacts",null,values);
+            return id > 0;
+
+        }
+        else if(name.length() == 0 && phone.length() >= 1){
+            values.put("name","--no name--");
+            values.put("phone",phone);
+            long id = database.insert("contacts",null,values);
+            return id > 0;
+        }
+        else {
+            return false;
+        }
+
     }
 
     public ArrayList<ContactModel> getContactsList() {

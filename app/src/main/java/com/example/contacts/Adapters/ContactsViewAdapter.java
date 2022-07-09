@@ -90,7 +90,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
                         @Override
                         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
                             MenuInflater menuInflater = actionMode.getMenuInflater();
-                            menuInflater.inflate(R.menu.contacts_menu, menu);
+                            menuInflater.inflate(R.menu.contacts_onselect_menu, menu);
                             return true;
                         }
 

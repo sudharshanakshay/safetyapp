@@ -117,8 +117,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startActivity(new Intent(MainActivity.this, ContactsActivity.class));
-
+//        startActivity(new Intent(MainActivity.this, DisplayContactsActivity.class));
 
         Toolbar myToolbar = findViewById(R.id.homeActivityToolbar);
         setSupportActionBar(myToolbar);
@@ -129,20 +128,20 @@ public class MainActivity extends AppCompatActivity {
 
 
         emergencyBtn = findViewById(R.id.emergencyBtn);
-        addcontact=(Button) findViewById(R.id.addcontact);
+//        addcontact=(Button) findViewById(R.id.addcontact);
 
         longitudeTextView = findViewById(R.id.longitudeTextView);
         latitudeTextView = findViewById(R.id.latitudeTextView);
 
         SmsManager smsManager = SmsManager.getDefault();
 
-        addcontact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(MainActivity.this,Register.class);
-                startActivity(intent);
-            }
-        });
+//        addcontact.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent= new Intent(MainActivity.this,Register.class);
+//                startActivity(intent);
+//            }
+//        });
 
         emergencyBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -226,28 +225,30 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
             case R.id.action_settings:
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
+            {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-//
-            case R.id.action_locationHistory:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                startActivity(new Intent(MainActivity.this, ContactsActivity.class));
-                return true;
+                break;
+            }
 
             case R.id.action_manage_contacts:
 
-                startActivity(new Intent(MainActivity.this, Register.class));
+            {
+                startActivity(new Intent(MainActivity.this, DisplayContactsActivity.class));
+                break;
+            }
 
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
+
         }
+        return super.onOptionsItemSelected(item);
     }
 }
