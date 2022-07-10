@@ -69,8 +69,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase database = this.getWritableDatabase();
 
+        String[] columnNames = {"id", "name", "phone"};
 
-        Cursor cursor = database.rawQuery("Select id, name, phone from contacts", null);
+        Cursor cursor = database.query("contacts", columnNames, null,null, null,null,"name" );
+
+
+//        Cursor cursor = database.rawQuery("Select id, name, phone from contacts ORDER BY name", null);
 
         if(cursor.moveToFirst()) {
             while(cursor.moveToNext()) {

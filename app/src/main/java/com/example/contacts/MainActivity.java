@@ -128,43 +128,25 @@ public class MainActivity extends AppCompatActivity {
 
 
         emergencyBtn = findViewById(R.id.emergencyBtn);
-//        addcontact=(Button) findViewById(R.id.addcontact);
-
         longitudeTextView = findViewById(R.id.longitudeTextView);
         latitudeTextView = findViewById(R.id.latitudeTextView);
 
         SmsManager smsManager = SmsManager.getDefault();
 
-//        addcontact.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent= new Intent(MainActivity.this,Register.class);
-//                startActivity(intent);
-//            }
-//        });
 
         emergencyBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                ArrayList<String> cellNo = new ArrayList<>();
+                updateLocation();
 
                 ArrayList<ContactModel> contacts = helper.getContactsList();
 
                 for (int i=0; i<contacts.size(); i++){
-//                    cellNo.add(contacts.get(i).getPhoneNumber());
+//                    System.out.println(contacts.get(i).getPhoneNumber());
                     smsManager.sendTextMessage(contacts.get(i).getPhoneNumber(), null,"hello", null, null);
                 }
 
-                System.out.println(cellNo);
-
-                updateLocation();
-//                smsManager.sendTextMessage("+91 98 804 38 931", null, String.valueOf(longitude)+"-"+String.valueOf(latitude)+"\n"+"hello from safety app !", null, null);
-//                for(String s : cellNo){
-//                    smsManager.sendTextMessage(s, null,"hello", null, null);
-//                }
-
 //                smsManager.sendTextMessage("+91 98 804 38 931", null,url+"\nEmergency\nMy last known location.", null, null);
-
 //                smsManager.sendTextMessage("+91 9845842582", null,url+"\nEmergency\nMy last known location.", null, null);
                 return false;
             }

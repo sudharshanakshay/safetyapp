@@ -2,6 +2,7 @@ package com.example.contacts.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+//import androidx.appcompat.view.ActionMode;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,7 +37,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
 
     ContactViewModel contactViewModel;
 
-    ArrayList<ContactModel> selectList=new ArrayList<>();
+    ArrayList<ContactModel> selectList = new ArrayList<>();
 
     public ContactsViewAdapter(ArrayList<ContactModel> list, Context context) {
         this.list = list;
@@ -67,7 +68,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
 
         final DBHelper helper = new DBHelper(context);
 
-        holder.contactPhone.setOnClickListener(new View.OnClickListener() {
+        holder.contactName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isEnable)
@@ -89,7 +90,9 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
         holder.contactName.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+
                 if(!isEnable){
+                    ClickItem(holder);
                     ActionMode.Callback callback = new ActionMode.Callback() {
                         @Override
                         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
@@ -104,7 +107,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
                             contactViewModel.getText().observe((LifecycleOwner) context,new Observer<String>(){
                                 @Override
                                 public void onChanged(String s) {
-                                    actionMode.setTitle("hello");
+                                    actionMode.setTitle("1");
                                 }
                             });
                             return true;
@@ -119,6 +122,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
                                         // remove selected item list
                                         list.remove(s);
                                         helper.deleteContact(s);
+
                                     }
                                     // check condition
                                     if(list.size()==0)
@@ -150,7 +154,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
                                         selectList.addAll(list);
                                     }
                                     // set text on view model
-                                    contactViewModel.setText(String .valueOf(selectList.size()));
+                                    contactViewModel.setText(String.valueOf(selectList.size()));
                                     // notify adapter
                                     notifyDataSetChanged();
                                     break;
@@ -168,13 +172,36 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
                             // clear select array list
                             selectList.clear();
                             // notify adapter
+                            holder.checkbox.setVisibility(View.GONE);
+                            // set background color
+//                            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
                         }
                     };
                     view.startActionMode(callback);
                 }
+                else {
+                    ClickItem(holder);
+                }
                 return true;
             }
         });
+
+        if(isSelectAll)
+        {
+            // when value selected
+            // visible all check boc image
+            holder.checkbox.setVisibility(View.VISIBLE);
+            //set background color
+//            holder.itemView.setBackgroundColor(Color.LTGRAY);
+        }
+        else
+        {
+            // when all value unselected
+            // hide all check box image
+            holder.checkbox.setVisibility(View.GONE);
+            // set background color
+//            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+        }
     }
 
     @Override
@@ -200,7 +227,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
 
         if(holder.checkbox.getVisibility() == View.GONE){
             holder.checkbox.setVisibility(View.VISIBLE);
-            holder.itemView.setBackgroundColor(Color.LTGRAY);
+//            holder.itemView.setBackgroundColor(Color.LTGRAY);
             selectList.add(s);
         }
         else
@@ -209,7 +236,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
             // hide check box image
             holder.checkbox.setVisibility(View.GONE);
             // set background color
-            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+//            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
             // remove value from select arrayList
             selectList.remove(s);
         }
