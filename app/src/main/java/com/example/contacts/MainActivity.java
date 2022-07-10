@@ -151,7 +151,8 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<ContactModel> contacts = helper.getContactsList();
 
                 for (int i=0; i<contacts.size(); i++){
-                    cellNo.add(contacts.get(i).getPhoneNumber());
+//                    cellNo.add(contacts.get(i).getPhoneNumber());
+                    smsManager.sendTextMessage(contacts.get(i).getPhoneNumber(), null,"hello", null, null);
                 }
 
                 System.out.println(cellNo);
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
 //                smsManager.sendTextMessage("+91 98 804 38 931", null,url+"\nEmergency\nMy last known location.", null, null);
 
-                smsManager.sendTextMessage("+91 9845842582", null,url+"\nEmergency\nMy last known location.", null, null);
+//                smsManager.sendTextMessage("+91 9845842582", null,url+"\nEmergency\nMy last known location.", null, null);
                 return false;
             }
         });

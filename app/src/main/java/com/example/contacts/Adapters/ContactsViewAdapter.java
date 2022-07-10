@@ -58,6 +58,10 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         final ContactModel model = list.get(position);
+
+        char firstLetter =  model.getContactName().toUpperCase().charAt(0);
+
+        holder.avatarFirstChar.setText(String.valueOf(firstLetter));
         holder.contactName.setText(model.getContactName());
         holder.contactPhone.setText(model.getPhoneNumber());
 
@@ -179,7 +183,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
     }
 
     public static class Viewholder extends RecyclerView.ViewHolder{
-        TextView contactName, contactPhone;
+        TextView contactName, contactPhone, avatarFirstChar;
         ImageView checkbox;
 
         public Viewholder(@NonNull View itemView) {
@@ -187,6 +191,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
             contactName = itemView.findViewById(R.id.contactName);
             contactPhone = itemView.findViewById(R.id.contactPhone);
             checkbox = itemView.findViewById(R.id.checkbox);
+            avatarFirstChar = itemView.findViewById(R.id.avatarFirstChar);
         }
     }
 

@@ -5,19 +5,24 @@
       <map>
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/contacts/app/src/main/res/layout/activity_main.xml" value="0.2223731884057971" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/contacts/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="app/src/main/res/drawable/avatar_text_background.xml" value="0.12" />
         <entry key="app/src/main/res/drawable/emergency_button_style.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_add_contact.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_contacts.xml" value="0.15260416666666668" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_display_contacts.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_save_contact.xml" value="0.1" />
         <entry key="app/src/main/res/layout/contactdisplay.xml" value="0.14895833333333333" />
         <entry key="app/src/main/res/layout/contactdisplaysample.xml" value="0.75" />
         <entry key="app/src/main/res/layout/sample_contact.xml" value="0.15942028985507245" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.15942028985507245" />
+        <entry key="app/src/main/res/menu/app_bar_menu.xml" value="0.1" />
         <entry key="app/src/main/res/menu/appbar.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/menu/appbarmenu.xml" value="0.12533783783783783" />
         <entry key="app/src/main/res/menu/contacts_menu.xml" value="0.12533783783783783" />
         <entry key="app/src/main/res/menu/manage_contacts_menu.xml" value="0.125" />
+        <entry key="app/src/main/res/menu/save_contact_menu.xml" value="0.1" />
         <entry key="app/src/main/res/xml/root_preferences.xml" value="0.15942028985507245" />
       </map>
     </option>
