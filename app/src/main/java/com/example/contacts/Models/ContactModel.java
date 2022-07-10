@@ -4,10 +4,11 @@ public class ContactModel {
     String contactName, phoneNumber;
     int contactId;
 
-//    public ContactModel(int phoneNumber, String contactName){
-//        this.phoneNumber = phoneNumber;
-//        this.contactName = contactName;
-//    }
+    public ContactModel(int contactId, String contactName, String phoneNumber){
+        this.contactId = contactId;
+        this.phoneNumber = phoneNumber;
+        this.contactName = contactName;
+    }
 
     public int getContactId(){
         return this.contactId;

@@ -1,5 +1,6 @@
 package com.example.contacts.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 //import androidx.appcompat.view.ActionMode;
@@ -39,9 +40,16 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
 
     ArrayList<ContactModel> selectList = new ArrayList<>();
 
-    public ContactsViewAdapter(ArrayList<ContactModel> list, Context context) {
-        this.list = list;
+    public ContactsViewAdapter( Context context) {
+        ArrayList<ContactModel> list;
+//        this.list = list;
+        final DBHelper helper = new DBHelper(context);
+        this.list = helper.getContactsList();
         this.context = context;
+    }
+
+    public void updateRecyclerViewList(ContactModel contactDetail){
+        list.add(contactDetail);
     }
 
     @NonNull
@@ -65,6 +73,10 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
         holder.avatarFirstChar.setText(String.valueOf(firstLetter));
         holder.contactName.setText(model.getContactName());
         holder.contactPhone.setText(model.getPhoneNumber());
+
+        if(list.size()==0){
+            holder.displayWhenEmpty.setVisibility(View.VISIBLE);
+        }
 
         final DBHelper helper = new DBHelper(context);
 
@@ -113,6 +125,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
                             return true;
                         }
 
+
                         @Override
                         public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
                             switch (menuItem.getItemId()){
@@ -127,9 +140,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
                                     // check condition
                                     if(list.size()==0)
                                     {
-                                        // when array list is empty
-                                        // visible text view
-//                                        tvEmpty.setVisibility(View.VISIBLE);
+//                                        holder.displayWhenEmpty.setVisibility(View.VISIBLE);
                                     }
                                     // finish action mode
                                     actionMode.finish();
@@ -175,6 +186,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
                             holder.checkbox.setVisibility(View.GONE);
                             // set background color
 //                            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+                            notifyDataSetChanged();
                         }
                     };
                     view.startActionMode(callback);
@@ -204,13 +216,20 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
         }
     }
 
+
+    public void notifyDataSetChange(){
+        final DBHelper helper = new DBHelper(context);
+        list = helper.getContactsList();
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return list.size();
     }
 
     public static class Viewholder extends RecyclerView.ViewHolder{
-        TextView contactName, contactPhone, avatarFirstChar;
+        TextView contactName, contactPhone, avatarFirstChar, displayWhenEmpty;
         ImageView checkbox;
 
         public Viewholder(@NonNull View itemView) {
@@ -219,6 +238,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
             contactPhone = itemView.findViewById(R.id.contactPhone);
             checkbox = itemView.findViewById(R.id.checkbox);
             avatarFirstChar = itemView.findViewById(R.id.avatarFirstChar);
+            displayWhenEmpty = itemView.findViewById(R.id.displayWhenEmpty);
         }
     }
 

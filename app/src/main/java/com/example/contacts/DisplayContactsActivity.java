@@ -39,7 +39,7 @@ public class DisplayContactsActivity extends AppCompatActivity {
 
         ArrayList<ContactModel> contacts = helper.getContactsList();
 
-        ContactsViewAdapter adapter = new ContactsViewAdapter(contacts, DisplayContactsActivity.this);
+        ContactsViewAdapter adapter = new ContactsViewAdapter(DisplayContactsActivity.this);
 
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(DisplayContactsActivity.this);

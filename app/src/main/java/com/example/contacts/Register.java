@@ -103,7 +103,7 @@ public class Register extends AppCompatActivity {
                 }catch (Exception e){}
 
 
-                ContactsViewAdapter adapter = new ContactsViewAdapter(contacts, Register.this);
+                ContactsViewAdapter adapter = new ContactsViewAdapter( Register.this);
 
 //                binding.contactDisplayRecyclerView.setAdapter(adapter);
 //                LinearLayoutManager layoutManager = new LinearLayoutManager(Register.this);

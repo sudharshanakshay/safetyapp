@@ -11,6 +11,9 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.contacts.Adapters.ContactsViewAdapter;
+import com.example.contacts.Models.ContactModel;
+
 public class SaveContactActivity extends AppCompatActivity {
     private DBHelper helper;
     EditText name, phone;
@@ -47,6 +50,16 @@ public class SaveContactActivity extends AppCompatActivity {
                 if(!phone.getText().toString().equals("")) {
                     helper.insertIntoContacts(name.getText().toString(), phone.getText().toString());
                     Toast.makeText(this, "Contact Added", Toast.LENGTH_SHORT).show();
+//                    ContactsViewAdapter contactsViewAdapter = new ContactsViewAdapter(this);
+//
+//
+//                    ContactModel model = new ContactModel(1, name.getText().toString(), phone.getText().toString());
+//
+//                    contactsViewAdapter.updateRecyclerViewList(model);
+//
+//
+//                    contactsViewAdapter.notifyDataSetChange();
+
                     onBackPressed();
                 }else{
                     Toast.makeText(this, "Please add Phone Number", Toast.LENGTH_SHORT).show();

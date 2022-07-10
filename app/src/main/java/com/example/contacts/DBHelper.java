@@ -78,10 +78,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
         if(cursor.moveToFirst()) {
             while(cursor.moveToNext()) {
-                ContactModel model = new ContactModel();
-                model.setContactId(cursor.getInt(0));
-                model.setContactName(cursor.getString(1)+ "");
-                model.setPhoneNumber(cursor.getString(2));
+                ContactModel model = new ContactModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+//                model.setContactId(cursor.getInt(0));
+//                model.setContactName(cursor.getString(1));
+//                model.setPhoneNumber(cursor.getString(2));
                 contacts.add(model);
             }
         }
