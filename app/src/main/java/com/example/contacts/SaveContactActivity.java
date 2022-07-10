@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SaveContactActivity extends AppCompatActivity {
     private DBHelper helper;
@@ -39,7 +40,21 @@ public class SaveContactActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_save_contact) {// User chose the "Favorite" action, mark the current item
             // as a favorite...
-            helper.insertIntoContacts(name.getText().toString(), phone.getText().toString());
+            if(name.getText().toString().equals("")){
+                Toast.makeText(this, "setting name as --no-name--", Toast.LENGTH_SHORT).show();
+            }
+            try {
+                if(!phone.getText().toString().equals("")) {
+                    helper.insertIntoContacts(name.getText().toString(), phone.getText().toString());
+                    Toast.makeText(this, "Contact Added", Toast.LENGTH_SHORT).show();
+                    onBackPressed();
+                }else{
+                    Toast.makeText(this, "Please add Phone Number", Toast.LENGTH_SHORT).show();
+                }
+            }
+            catch (Exception e){
+                Toast.makeText(this, "Not Saved", Toast.LENGTH_SHORT).show();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
