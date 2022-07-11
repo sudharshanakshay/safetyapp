@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Register">
+    tools:context=".SaveContactActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/saveContactActivityToolBar"
@@ -38,7 +38,7 @@
             android:layout_height="25dp"
             android:layout_gravity="center"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/person_24" />
+            android:src="@drawable/icon_person_24" />
 
 
 
@@ -70,7 +70,7 @@
             android:layout_height="25dp"
             android:layout_gravity="center"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/call_24" />
+            android:src="@drawable/icon_call_24" />
 
         <EditText
             android:id="@+id/phone"

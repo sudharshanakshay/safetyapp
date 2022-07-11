@@ -5,9 +5,19 @@
       <map>
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/contacts/app/src/main/res/layout/activity_main.xml" value="0.2223731884057971" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/contacts/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.12" />
+        <entry key="app/src/main/res/drawable/add_24.xml" value="0.12" />
         <entry key="app/src/main/res/drawable/avatar_text_background.xml" value="0.12" />
+        <entry key="app/src/main/res/drawable/call_24.xml" value="0.12" />
         <entry key="app/src/main/res/drawable/cancel_button_style.xml" value="0.12" />
+        <entry key="app/src/main/res/drawable/check_24.xml" value="0.12" />
+        <entry key="app/src/main/res/drawable/check_box_outline_blank_24.xml" value="0.12" />
+        <entry key="app/src/main/res/drawable/delete_forever_24.xml" value="0.12" />
         <entry key="app/src/main/res/drawable/emergency_button_style.xml" value="0.12" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.12" />
+        <entry key="app/src/main/res/drawable/person_24.xml" value="0.12" />
+        <entry key="app/src/main/res/drawable/person_pin_24.xml" value="0.12" />
+        <entry key="app/src/main/res/drawable/select_all_24.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_add_contact.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_contacts.xml" value="0.15260416666666668" />
         <entry key="app/src/main/res/layout/activity_display_contacts.xml" value="0.33" />

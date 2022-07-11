@@ -28,6 +28,7 @@ import com.example.contacts.Models.ContactViewModel;
 import com.example.contacts.R;
 
 import java.util.ArrayList;
+import java.util.zip.GZIPOutputStream;
 
 public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapter.Viewholder> {
 
@@ -40,16 +41,12 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
 
     ArrayList<ContactModel> selectList = new ArrayList<>();
 
-    public ContactsViewAdapter( Context context) {
+    public ContactsViewAdapter(Context context) {
         ArrayList<ContactModel> list;
 //        this.list = list;
         final DBHelper helper = new DBHelper(context);
         this.list = helper.getContactsList();
         this.context = context;
-    }
-
-    public void updateRecyclerViewList(ContactModel contactDetail){
-        list.add(contactDetail);
     }
 
     @NonNull
@@ -102,7 +99,6 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
         holder.contactName.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-
                 if(!isEnable){
                     ClickItem(holder);
                     ActionMode.Callback callback = new ActionMode.Callback() {
@@ -119,6 +115,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
                             contactViewModel.getText().observe((LifecycleOwner) context,new Observer<String>(){
                                 @Override
                                 public void onChanged(String s) {
+
                                     actionMode.setTitle("1");
                                 }
                             });
@@ -183,10 +180,12 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
                             // clear select array list
                             selectList.clear();
                             // notify adapter
+                            notifyDataSetChanged();
                             holder.checkbox.setVisibility(View.GONE);
+//                            holder.checkbox_outline.setVisibility(View.GONE);
                             // set background color
 //                            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
-                            notifyDataSetChanged();
+
                         }
                     };
                     view.startActionMode(callback);
@@ -202,6 +201,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
         {
             // when value selected
             // visible all check boc image
+//            holder.checkbox_outline.setVisibility(View.GONE);
             holder.checkbox.setVisibility(View.VISIBLE);
             //set background color
 //            holder.itemView.setBackgroundColor(Color.LTGRAY);
@@ -211,16 +211,10 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
             // when all value unselected
             // hide all check box image
             holder.checkbox.setVisibility(View.GONE);
+//            holder.checkbox_outline.setVisibility(View.VISIBLE);
             // set background color
 //            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
         }
-    }
-
-
-    public void notifyDataSetChange(){
-        final DBHelper helper = new DBHelper(context);
-        list = helper.getContactsList();
-        notifyDataSetChanged();
     }
 
     @Override
@@ -230,7 +224,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
 
     public static class Viewholder extends RecyclerView.ViewHolder{
         TextView contactName, contactPhone, avatarFirstChar, displayWhenEmpty;
-        ImageView checkbox;
+        ImageView checkbox, checkbox_outline;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
@@ -239,6 +233,7 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
             checkbox = itemView.findViewById(R.id.checkbox);
             avatarFirstChar = itemView.findViewById(R.id.avatarFirstChar);
             displayWhenEmpty = itemView.findViewById(R.id.displayWhenEmpty);
+            checkbox_outline = itemView.findViewById(R.id.checkbox_outline);
         }
     }
 
@@ -246,18 +241,13 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
         ContactModel s = list.get(holder.getAdapterPosition());
 
         if(holder.checkbox.getVisibility() == View.GONE){
+//            holder.checkbox_outline.setVisibility(View.GONE);
             holder.checkbox.setVisibility(View.VISIBLE);
-//            holder.itemView.setBackgroundColor(Color.LTGRAY);
             selectList.add(s);
         }
         else
         {
-            // when item selected
-            // hide check box image
             holder.checkbox.setVisibility(View.GONE);
-            // set background color
-//            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
-            // remove value from select arrayList
             selectList.remove(s);
         }
         contactViewModel.setText(String.valueOf(selectList.size()));

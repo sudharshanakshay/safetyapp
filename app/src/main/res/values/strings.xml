@@ -32,4 +32,8 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="longitude">longitude</string>
     <string name="latitude">latitude</string>
+    <string name="phone_text_view_title">phone</string>
+    <string name="contact_text_view_title">TextView</string>
+    <string name="checkbox_img_content_desc">checkBox</string>
+    <string name="initial_avatar_icon_text">I</string>
 </resources>
