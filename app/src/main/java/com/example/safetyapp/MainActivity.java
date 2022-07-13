@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.contacts.R;
 import com.example.safetyapp.Models.ContactModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -84,8 +85,7 @@ public class MainActivity extends AppCompatActivity {
     private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
-                    // Permission is granted. Continue the action or workflow in your
-                    // app.
+                    // Permission is granted. Continue the action or workflow in your app
 //                    getLocationBtn.setEnabled(true);
 
                 } else {
@@ -106,18 +106,19 @@ public class MainActivity extends AppCompatActivity {
                     Manifest.permission.SEND_SMS);
         }
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissionLauncher.launch(
+                    Manifest.permission.SEND_SMS);
+            requestPermissionLauncher.launch(
+                    Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
             Toast.makeText(MainActivity.this, "Permission not granted", Toast.LENGTH_SHORT).show();
             requestPermissionLauncher.launch(
                     Manifest.permission.ACCESS_FINE_LOCATION);
 
-            requestPermissionLauncher.launch(
-                    Manifest.permission.ACCESS_COARSE_LOCATION);
-
         }
-        else {
-
-//            Toast.makeText(MainActivity.this, "Permission already granted", Toast.LENGTH_SHORT).show();
             fusedLocationClient.getLastLocation()
                     .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                         @Override
@@ -144,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     });
-        }
     }
 
     private void updateLocation(){
