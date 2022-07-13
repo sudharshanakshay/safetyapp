@@ -64,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public ContactModel getContact(String id){
+    public ContactModel getXcontact(String id){
         SQLiteDatabase database = this.getWritableDatabase();
         String[] columnNames = {"id", "name", "phone"};
         Cursor cursor = database.query("contacts", columnNames, "id=?", new String[]{String.valueOf(id)},null, null,null);
@@ -102,9 +102,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return contacts;
     }
 
-    public void updateXContact(String contactID, String name, String phone){
+    public void updateXcontact(String contactID, String name, String phone){
         SQLiteDatabase database = this.getWritableDatabase();
-
+        
         ContentValues values = new ContentValues();
         values.put("name",name);
         values.put("phone",phone);
