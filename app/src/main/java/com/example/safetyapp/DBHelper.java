@@ -64,6 +64,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public ContactModel getContact(String id){
+        SQLiteDatabase database = this.getWritableDatabase();
+        String[] columnNames = {"id", "name", "phone"};
+        Cursor cursor = database.query("contacts", columnNames, "id=?", new String[]{String.valueOf(id)},null, null,null);
+
+        cursor.moveToFirst();
+        ContactModel contact = new ContactModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+        cursor.close();
+        database.close();
+
+        return contact;
+    }
+
     public ArrayList<ContactModel> getContactsList() {
         ArrayList<ContactModel> contacts = new ArrayList<>();
 
@@ -89,7 +102,19 @@ public class DBHelper extends SQLiteOpenHelper {
         return contacts;
     }
 
-    public int deleteContact(ContactModel contactModel){
+    public void updateXContact(String contactID, String name, String phone){
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("name",name);
+        values.put("phone",phone);
+
+        database.update("contacts", values, "id=?", new String[]{contactID});
+
+        database.close();
+    }
+
+    public void deleteContact(ContactModel contactModel){
         SQLiteDatabase database = this.getWritableDatabase();
 
         int a = database.delete("contacts", "id=?", new String[] {String.valueOf(contactModel.getContactId())} );
@@ -97,6 +122,7 @@ public class DBHelper extends SQLiteOpenHelper {
         System.out.println(a);
 
         database.close();
-        return 0;
     }
+
+
 }

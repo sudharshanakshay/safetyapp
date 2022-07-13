@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,9 +12,12 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.safetyapp.Models.ContactModel;
+
 public class SaveContactActivity extends AppCompatActivity {
     private DBHelper helper;
     EditText name, phone;
+    String contactID = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,25 @@ public class SaveContactActivity extends AppCompatActivity {
 
         name = findViewById(R.id.name );
         phone= findViewById(R.id.phone );
+
+        if(getIntent().hasExtra("contactID")){
+            if (savedInstanceState == null) {
+                Bundle extras = getIntent().getExtras();
+                if(extras == null) {
+                    contactID= null;
+                } else {
+                    contactID= extras.getString("contactID");
+                }
+            } else {
+                contactID= (String) savedInstanceState.getSerializable("contactID");
+            }
+
+            ContactModel contact = helper.getContact(contactID);
+
+            name.setText(contact.getContactName());
+            phone.setText(contact.getPhoneNumber());
+        }
+
     }
 
     @Override
@@ -45,17 +68,13 @@ public class SaveContactActivity extends AppCompatActivity {
             }
             try {
                 if(!phone.getText().toString().equals("")) {
-                    helper.insertIntoContacts(name.getText().toString(), phone.getText().toString());
-                    Toast.makeText(this, "Contact Added", Toast.LENGTH_SHORT).show();
-//                    ContactsViewAdapter contactsViewAdapter = new ContactsViewAdapter(this);
-//
-//
-//                    ContactModel model = new ContactModel(1, name.getText().toString(), phone.getText().toString());
-//
-//                    contactsViewAdapter.updateRecyclerViewList(model);
-//
-//
-//                    contactsViewAdapter.notifyDataSetChange();
+
+//                    -------------- save contact --------------
+                    if(contactID == null) helper.insertIntoContacts(name.getText().toString(), phone.getText().toString());
+
+//                    -------------- update contact --------------
+                    else helper.updateXContact(contactID, name.getText().toString(), phone.getText().toString());
+                    Toast.makeText(this, "Contact Saved", Toast.LENGTH_SHORT).show();
 
                     onBackPressed();
                 }else{

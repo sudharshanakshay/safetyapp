@@ -2,6 +2,7 @@ package com.example.safetyapp.Adapters;
 
 import android.content.Context;
 //import androidx.appcompat.view.ActionMode;
+import android.content.Intent;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,10 +21,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.safetyapp.R;
 import com.example.safetyapp.DBHelper;
 import com.example.safetyapp.Models.ContactModel;
 import com.example.safetyapp.Models.ContactViewModel;
-import com.example.safetyapp.R;
+import com.example.safetyapp.SaveContactActivity;
 
 import java.util.ArrayList;
 
@@ -87,8 +89,13 @@ public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapt
                 {
                     // when action mode is not enable
                     // display toast
-                    Toast.makeText(context,"You Clicked"+list.get(holder.getAdapterPosition()),
-                            Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(context, SaveContactActivity.class);
+                    intent.putExtra("contactID", String.valueOf(model.getContactId()));
+                    context.startActivity(intent);
+
+//                    Toast.makeText(context,"You Clicked"+list.get(holder.getAdapterPosition()),
+//                            Toast.LENGTH_SHORT).show();
                 }
             }
         });

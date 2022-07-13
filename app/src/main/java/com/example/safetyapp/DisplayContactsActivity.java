@@ -37,7 +37,7 @@ public class DisplayContactsActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerViewContacts);
 
-        ArrayList<ContactModel> contacts = helper.getContactsList();
+//        ArrayList<ContactModel> contacts = helper.getContactsList();
 
         ContactsViewAdapter adapter = new ContactsViewAdapter(DisplayContactsActivity.this);
 
