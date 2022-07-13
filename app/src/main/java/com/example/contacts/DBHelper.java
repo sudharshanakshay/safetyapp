@@ -73,11 +73,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor cursor = database.query("contacts", columnNames, null,null, null,null,"name" );
 
+        System.out.println("---------------------------");
+        System.out.println(cursor.getCount());
+        System.out.println("---------------------------");
+
         if(cursor.moveToFirst()) {
-            while(cursor.moveToNext()) {
+            do {
+                System.out.println(cursor.getString(2));
                 ContactModel model = new ContactModel(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
                 contacts.add(model);
-            }
+            }while (cursor.moveToNext());
         }
         cursor.close();
         database.close();
