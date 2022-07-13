@@ -1,4 +1,4 @@
-package com.example.contacts;
+package com.example.safetyapp;
 
 import android.content.ContentValues;
 import android.content.Context;

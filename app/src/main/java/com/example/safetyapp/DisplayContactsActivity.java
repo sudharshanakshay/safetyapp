@@ -1,4 +1,4 @@
-package com.example.contacts;
+package com.example.safetyapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -13,8 +13,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.example.contacts.Adapters.ContactsViewAdapter;
-import com.example.contacts.Models.ContactModel;
+import com.example.safetyapp.Adapters.ContactsViewAdapter;
+import com.example.safetyapp.Models.ContactModel;
 
 import java.util.ArrayList;
 

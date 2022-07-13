@@ -1,4 +1,4 @@
-package com.example.contacts.Models;
+package com.example.safetyapp.Models;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

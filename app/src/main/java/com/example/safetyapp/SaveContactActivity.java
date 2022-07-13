@@ -1,4 +1,4 @@
-package com.example.contacts;
+package com.example.safetyapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,9 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.example.contacts.Adapters.ContactsViewAdapter;
-import com.example.contacts.Models.ContactModel;
 
 public class SaveContactActivity extends AppCompatActivity {
     private DBHelper helper;

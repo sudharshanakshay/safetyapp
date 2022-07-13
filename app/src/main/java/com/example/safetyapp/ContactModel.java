@@ -1,4 +1,4 @@
-package com.example.contacts;
+package com.example.safetyapp;
 
 public class ContactModel {
     String name,phone;

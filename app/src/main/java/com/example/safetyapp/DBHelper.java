@@ -1,4 +1,4 @@
-package com.example.contacts;
+package com.example.safetyapp;
 
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.database.Cursor;
 import androidx.annotation.Nullable;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.contacts.Models.ContactModel;
+import com.example.safetyapp.Models.ContactModel;
 
 import java.util.ArrayList;
 

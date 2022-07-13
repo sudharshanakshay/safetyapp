@@ -1,8 +1,6 @@
-package com.example.contacts.Adapters;
+package com.example.safetyapp.Adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 //import androidx.appcompat.view.ActionMode;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -22,13 +20,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.contacts.DBHelper;
-import com.example.contacts.Models.ContactModel;
-import com.example.contacts.Models.ContactViewModel;
-import com.example.contacts.R;
+import com.example.safetyapp.DBHelper;
+import com.example.safetyapp.Models.ContactModel;
+import com.example.safetyapp.Models.ContactViewModel;
+import com.example.safetyapp.R;
 
 import java.util.ArrayList;
-import java.util.zip.GZIPOutputStream;
 
 public class ContactsViewAdapter extends  RecyclerView.Adapter<ContactsViewAdapter.Viewholder> {
 
