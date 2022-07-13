@@ -4,30 +4,79 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.telephony.SmsManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.contacts.Models.ContactModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.util.ArrayList;
+
+
 public class MainActivity extends AppCompatActivity {
 
-    private static final int ACCESS_FINE_LOCATION_PERMISSION_CODE = 100;
+    TextView longitudeTextView, latitudeTextView, displayTimer;
+    Button emergencyBtn, cancelSendSMSBtn;
 
-    TextView longitudeTextView, latitudeTextView;
-    Button addcontact;
-    Button emergencyBtn;
+    private  int counter = 0;
+
+    Handler mainHandler = new Handler();
+
+    boolean running = false;
+    ArrayList<ContactModel> contacts;
+
+    NewThread sendSMSThread = new NewThread();
+    SmsManager smsManager = SmsManager.getDefault();
+
+    class NewThread extends Thread {
+        @Override
+        public void run() {
+            while (running) {
+                mainHandler.post(new Runnable() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void run() {
+                        displayTimer.setText("Sending SMS in "+String.valueOf(counter));
+                        if(!(counter<=0)) counter--;
+                        else {
+                            running = false;
+                            for (int i = 0; i < contacts.size(); i++) {
+//                              System.out.println(contacts.get(i).getPhoneNumber());
+                                smsManager.sendTextMessage(contacts.get(i).getPhoneNumber(), null, url+"\nEmergency\nMy last known location.", null, null);
+                            }
+                        }
+                    }
+                });
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+//            Toast.makeText(MainActivity.this, "SMS sent", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private static final int ACCESS_FINE_LOCATION_PERMISSION_CODE = 100;
     private double longitude ;
     private double latitude;
     private String url = "https://www.google.com/maps/search/?api=1&"+longitude+","+latitude;
@@ -48,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-    private void handleNsetLocation (){
+    private void handleNSetLocation(){
 
         FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -78,8 +127,6 @@ public class MainActivity extends AppCompatActivity {
                                 latitude = location.getLatitude();
                                 longitude = location.getLongitude();
 
-
-
                                 longitudeTextView.setText(String.valueOf(longitude));
                                 latitudeTextView.setText(String.valueOf(latitude));
 
@@ -101,46 +148,60 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateLocation(){
-        handleNsetLocation();
+        handleNSetLocation();
         url = "https://www.google.com/maps/search/?api=1&"+longitude+","+latitude;
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        handleNsetLocation();
+        Toolbar myToolbar = findViewById(R.id.homeActivityToolbar);
+        setSupportActionBar(myToolbar);
 
+        final DBHelper helper = new DBHelper(this);
+
+        handleNSetLocation();
 
         emergencyBtn = findViewById(R.id.emergencyBtn);
-        addcontact=(Button) findViewById(R.id.addcontact);
-
+        cancelSendSMSBtn = findViewById(R.id.cancelSendSMSBtn);
         longitudeTextView = findViewById(R.id.longitudeTextView);
         latitudeTextView = findViewById(R.id.latitudeTextView);
+        displayTimer = findViewById(R.id.displayTimer);
 
-        SmsManager smsManager = SmsManager.getDefault();
+        if(counter == 0){
+            displayTimer.setVisibility(View.GONE);
+            cancelSendSMSBtn.setVisibility(View.GONE);
+        }
 
-
-
-
-
-        addcontact.setOnClickListener(new View.OnClickListener() {
+        emergencyBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(MainActivity.this,Register.class);
-                startActivity(intent);
+            public boolean onLongClick(View view) {
+                updateLocation();
+                contacts = helper.getContactsList();
+
+                displayTimer.setVisibility(View.VISIBLE);
+                cancelSendSMSBtn.setVisibility(View.VISIBLE);
+
+                counter = 5;
+                running =  true;
+                if(sendSMSThread.isAlive());
+                else{
+                    sendSMSThread = new NewThread();
+                    sendSMSThread.start();
+                }
+                return false;
             }
         });
 
-        emergencyBtn.setOnClickListener(new View.OnClickListener() {
+        cancelSendSMSBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                updateLocation();
-//                smsManager.sendTextMessage("+91 98 804 38 931", null, String.valueOf(longitude)+"-"+String.valueOf(latitude)+"\n"+"hello from safety app !", null, null);
-                smsManager.sendTextMessage("+91 98 804 38 931", null,url+"\nEmergency\nMy last known location.", null, null);
+            public void onClick(View view) {
+                running = false;
+                displayTimer.setVisibility(View.GONE);
+                cancelSendSMSBtn.setVisibility(View.GONE);
+                sendSMSThread.interrupt();
             }
         });
     }
@@ -167,5 +228,39 @@ public class MainActivity extends AppCompatActivity {
         }
         // Other 'case' lines to check for other
         // permissions this app might request.
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.app_bar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_settings:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+            {
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                break;
+            }
+
+            case R.id.action_manage_contacts:
+
+            {
+                startActivity(new Intent(MainActivity.this, DisplayContactsActivity.class));
+                break;
+            }
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

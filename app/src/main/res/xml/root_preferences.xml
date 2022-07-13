@@ -1,0 +1,39 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/info_header">
+
+        <EditTextPreference
+            app:key="username"
+            app:title="@string/username_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:key="userPhone"
+            app:title="@string/userPhone_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:key="userEmail"
+            app:title="@string/userEmail_title"
+            app:useSimpleSummaryProvider="true" />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/messages_header">
+
+        <SwitchPreferenceCompat
+            app:key="customMessageSwitch"
+            app:title="@string/customMessageSwitch_title" />
+
+        <EditTextPreference
+            app:key="customMessage"
+            app:dependency="customMessageSwitch"
+            app:title="@string/customMessage_title"
+            app:useSimpleSummaryProvider="true" />
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
