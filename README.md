@@ -1,6 +1,6 @@
 
 
-# Safety App - Mini Project, Mobile Application Development
+# Safety App - Mobile Application Development
 
   App is intended to send Multiple SMS with the last known Location with a "Emergency message". </br>
  - On Long press on **'Emergency'** button, **send SMS** in SafetyApp is initiated. </br>
