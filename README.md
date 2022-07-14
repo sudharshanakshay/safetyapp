@@ -13,7 +13,7 @@
 
 ## Sample SMS Recieved
 
-<img src="./docs/assets/myLastKnownLocation.jpg" alt="MyLastKnownLocation" width="360" height="160">
+<img src="./docs/assets/myLastKnownLocation.jpg" alt="MyLastKnownLocation" width="360" height="150">
 
 
 ## Screenshots of SafetyApp
@@ -21,11 +21,11 @@
 |  |  |
 |:-------------------------:|:-------------------------:|
 | Home Page | Emergency Initiated|
-| <img alt="" src="./docs/assets/home_page.png" width="170" height="280"> |<img alt="" src="./docs/assets/send_sms.png" width="170" height="280">|
+| <img alt="" src="./docs/assets/home_page.png" width="165" height="280"> |<img alt="" src="./docs/assets/send_sms.png" width="165" height="280">|
 | Terminate SMS | Display Contact |
-|<img alt="" src="./docs/assets/cancel_send_sms.png" width="170" height="280">|<img alt="" src="./docs/assets/display_contact.png" width="170" height="280">|
+|<img alt="" src="./docs/assets/cancel_send_sms.png" width="165" height="280">|<img alt="" src="./docs/assets/display_contact.png" width="165" height="280">|
 | Save Contact | Save Contact |
-|<img alt="" src="./docs/assets/add_contact_name.png" width="170" height="280">|<img alt="" src="./docs/assets/add_contact_phone.png" width="170" height="280">|
+|<img alt="" src="./docs/assets/add_contact_name.png" width="165" height="280">|<img alt="" src="./docs/assets/add_contact_phone.png" width="165" height="280">|
 
 ## Nerd
 - App uses **Java Thread** concept to run Timer & send SMS seperately from main thread.
