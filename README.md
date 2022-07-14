@@ -3,7 +3,7 @@
 # Safety App - Mobile Application Development
 
   App is intended to send Multiple SMS with the last known Location with a "Emergency message". </br>
- - On Long press on **'Emergency'** button, **send SMS** in SafetyApp is initiated. </br>
+ - On Long press on **'Emergency'** button, **send SMS** in SafetyApp is initiated with a **5 Second timer**. </br>
  - App fetches your last know location recorded in you phone, this location will be sent to all the saved contacts in SafetyApp. </br>  
  - A **'Cancel'** button appears to cancel the send SMS to all the saved contacts in case, mistakely send SMS is initiated. </br>
  - By this said, ofcourse there is **Add**, **update** & **delete** options for any saved contacts. </br>
@@ -32,3 +32,5 @@
 
 ## Work Remaining
 - Send Custom message as set in settings page.
+
+### Any new ideas or updates are always welcome 🤗!
