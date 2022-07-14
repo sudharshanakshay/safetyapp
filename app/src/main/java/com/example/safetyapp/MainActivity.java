@@ -116,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
             requestPermissionLauncher.launch(
                     Manifest.permission.ACCESS_FINE_LOCATION);
         }
+
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
+            requestPermissionLauncher.launch(Manifest.permission.READ_PHONE_STATE);
+        }
     }
 
     private void updateLocation() {
