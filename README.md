@@ -1,4 +1,4 @@
-## 'Safety App' Mini Project, Mobile Application Development
+# Safety App - Mini Project, Mobile Application Development
 
   App is intended to send Multiple SMS with the last known Location with a "Emergency message". </br>
  - On Long press on **'Emergency'** button, **send SMS** in SafetyApp is initiated. </br>
@@ -6,7 +6,7 @@
  - A **'Cancel'** button appears to cancel the send SMS to all the saved contacts in case, mistakely send SMS is initiated. </br>
  - By this said, ofcourse there is **Add**, **update** & **delete** options for any saved contacts. </br>
 
-## Software & Languages
+## Software & Languages used
 - Android Studio - Java, XML
 
 ## Sample SMS Recieved
