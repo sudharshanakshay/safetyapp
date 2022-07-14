@@ -58,11 +58,18 @@ public class MainActivity extends AppCompatActivity {
                         displayTimer.setText("Sending SMS in " + String.valueOf(counter));
                         if (!(counter <= 0)) counter--;
                         else {
-                            running = false;
                             for (int i = 0; i < contacts.size(); i++) {
 //                              System.out.println(contacts.get(i).getPhoneNumber());
-                                smsManager.sendTextMessage(contacts.get(i).getPhoneNumber(), null, url + "\nEmergency\nMy last known location.", null, null);
+                                try {
+                                    smsManager.sendTextMessage(contacts.get(i).getPhoneNumber(), null, url + "\nEmergency\nMy last known location.", null, null);
+                                }
+                                catch (Exception e){
+                                    System.out.println("------------send SMS error--------------");
+                                    System.out.println(e);
+                                    System.out.println("------------send SMS error--------------");
+                                }
                             }
+                            running = false;
                         }
                     }
                 });
