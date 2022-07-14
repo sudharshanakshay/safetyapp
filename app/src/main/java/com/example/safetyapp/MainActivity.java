@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                                     System.out.println("------------send SMS error--------------");
                                     System.out.println(e);
                                     System.out.println("------------send SMS error--------------");
+                                    initiatePermissionRequest();
                                 }
                             }
                             running = false;
@@ -104,22 +106,47 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+    private void hasPermission(Context context){
+
+    }
+
     private void initiatePermissionRequest() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissionLauncher.launch(
-                    Manifest.permission.SEND_SMS);
-        }
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissionLauncher.launch(
-                    Manifest.permission.ACCESS_COARSE_LOCATION);
-            requestPermissionLauncher.launch(
-                    Manifest.permission.ACCESS_FINE_LOCATION);
-        }
+        int permissionsCode = 51;
+        String[] permission = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION};
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
-            requestPermissionLauncher.launch(Manifest.permission.READ_PHONE_STATE);
-        }
+        ActivityCompat.requestPermissions(this, permission, permissionsCode);
+
+
+//
+//        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
+//            && ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED
+//                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+//                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+//        ){
+//            System.out.println("from initialpermission, about to request all required permission !");
+//            requestPermissionLauncher.launch(Manifest.permission.READ_PHONE_STATE);
+//            requestPermissionLauncher.launch(
+//                    Manifest.permission.ACCESS_COARSE_LOCATION);
+//            requestPermissionLauncher.launch(
+//                    Manifest.permission.ACCESS_FINE_LOCATION);
+//            requestPermissionLauncher.launch(
+//                    Manifest.permission.SEND_SMS);
+//        }
+
+
+//        if () {
+//            requestPermissionLauncher.launch(
+//                    Manifest.permission.SEND_SMS);
+//        }
+//
+//        if ( && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            requestPermissionLauncher.launch(
+//                    Manifest.permission.ACCESS_COARSE_LOCATION);
+//            requestPermissionLauncher.launch(
+//                    Manifest.permission.ACCESS_FINE_LOCATION);
+//        }
+
     }
 
     private void updateLocation() {
@@ -232,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
                     // Permission is granted. Continue the action or workflow
                     // in your app.
                 } else {
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
                     // Explain to the user that the feature is unavailable because
                     // the features requires a permission that the user has denied.
                     // At the same time, respect the user's decision. Don't link to
