@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     TextView longitudeTextView, latitudeTextView, displayTimer;
     Button emergencyBtn, cancelSendSMSBtn;
 
-    private  int counter = 0;
+    private int counter = 0;
 
     Handler mainHandler = new Handler();
 
@@ -55,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void run() {
-                        displayTimer.setText("Sending SMS in "+String.valueOf(counter));
-                        if(!(counter<=0)) counter--;
+                        displayTimer.setText("Sending SMS in " + String.valueOf(counter));
+                        if (!(counter <= 0)) counter--;
                         else {
                             running = false;
                             for (int i = 0; i < contacts.size(); i++) {
 //                              System.out.println(contacts.get(i).getPhoneNumber());
-                                smsManager.sendTextMessage(contacts.get(i).getPhoneNumber(), null, url+"\nEmergency\nMy last known location.", null, null);
+                                smsManager.sendTextMessage(contacts.get(i).getPhoneNumber(), null, url + "\nEmergency\nMy last known location.", null, null);
                             }
                         }
                     }
@@ -78,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static final int ACCESS_FINE_LOCATION_PERMISSION_CODE = 100;
-    private double longitude ;
+    private double longitude;
     private double latitude;
-    private String url = "https://www.google.com/maps/search/?api=1&"+longitude+","+latitude;
+    private String url = "https://www.google.com/maps/search/?api=1&" + longitude + "," + latitude;
 
     private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
@@ -97,59 +97,60 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-    private void handleNSetLocation(){
-
-        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+    private void initiatePermissionRequest() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             requestPermissionLauncher.launch(
                     Manifest.permission.SEND_SMS);
         }
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissionLauncher.launch(
-                    Manifest.permission.SEND_SMS);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissionLauncher.launch(
                     Manifest.permission.ACCESS_COARSE_LOCATION);
-        }
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-            Toast.makeText(MainActivity.this, "Permission not granted", Toast.LENGTH_SHORT).show();
             requestPermissionLauncher.launch(
                     Manifest.permission.ACCESS_FINE_LOCATION);
-
         }
-            fusedLocationClient.getLastLocation()
-                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            // Got last known location. In some rare situations this can be null.
-                            if (location != null) {
-                                latitude = location.getLatitude();
-                                longitude = location.getLongitude();
-
-                                longitudeTextView.setText(String.valueOf(longitude));
-                                latitudeTextView.setText(String.valueOf(latitude));
-
-                                System.out.println();
-                                Toast.makeText(MainActivity.this, " location ", Toast.LENGTH_SHORT).show();
-
-                                System.out.println("----------------------------");
-                                System.out.println(latitude);
-                                System.out.println(longitude);
-                                System.out.println("----------------------------");
-                                Toast.makeText(MainActivity.this, latitude + " " + longitude, Toast.LENGTH_SHORT).show();
-                                // Logic to handle location object
-                            } else {
-                                Toast.makeText(MainActivity.this, "location null", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
     }
 
-    private void updateLocation(){
-        handleNSetLocation();
-        url = "https://www.google.com/maps/search/?api=1&"+longitude+","+latitude;
+    private void updateLocation() {
+        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            initiatePermissionRequest();
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                            url = "https://www.google.com/maps/search/?api=1&"+longitude+","+latitude;
+
+                            longitudeTextView.setText(String.valueOf(longitude));
+                            latitudeTextView.setText(String.valueOf(latitude));
+
+                            System.out.println();
+                            Toast.makeText(MainActivity.this, " location ", Toast.LENGTH_SHORT).show();
+
+                            System.out.println("----------------------------");
+                            System.out.println(latitude);
+                            System.out.println(longitude);
+                            System.out.println("----------------------------");
+                            Toast.makeText(MainActivity.this, latitude + " " + longitude, Toast.LENGTH_SHORT).show();
+                            // Logic to handle location object
+                        } else {
+                            Toast.makeText(MainActivity.this, "location null", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     @Override
@@ -160,9 +161,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.homeActivityToolbar);
         setSupportActionBar(myToolbar);
 
+        initiatePermissionRequest();
+
         final DBHelper helper = new DBHelper(this);
 
-        handleNSetLocation();
+        updateLocation();
 
         emergencyBtn = findViewById(R.id.emergencyBtn);
         cancelSendSMSBtn = findViewById(R.id.cancelSendSMSBtn);
