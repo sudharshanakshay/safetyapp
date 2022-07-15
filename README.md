@@ -11,21 +11,21 @@
 ## Software & Languages used
 - Android Studio - Java, XML
 
-## Sample SMS Recieved
-
-<img src="./docs/assets/myLastKnownLocation.jpg" alt="MyLastKnownLocation" width="360" height="150">
 
 
 ## Screenshots of SafetyApp
 
-|  |  |
-|:-------------------------:|:-------------------------:|
-| Home Page | Emergency Initiated|
-| <img alt="" src="./docs/assets/home_page.png" width="165" height="280"> |<img alt="" src="./docs/assets/send_sms.png" width="165" height="280">|
-| Terminate SMS | Display Contact |
-|<img alt="" src="./docs/assets/cancel_send_sms.png" width="165" height="280">|<img alt="" src="./docs/assets/display_contact.png" width="165" height="280">|
-| Save Contact | Save Contact |
-|<img alt="" src="./docs/assets/add_contact_name.png" width="165" height="280">|<img alt="" src="./docs/assets/add_contact_phone.png" width="165" height="280">|
+|  |  | |
+|:-------------------------:|:-------------------------:|:-------------------------:|
+| Home Page | Emergency Initiated|Terminate SMS |
+| <img alt="" src="./docs/assets/home_page.png" width="165" height="280"> |<img alt="" src="./docs/assets/send_sms.png" width="165" height="280">|<img alt="" src="./docs/assets/cancel_send_sms.png" width="165" height="280">|
+|  Display Contact | Save Contact | Save Contact |
+|<img alt="" src="./docs/assets/display_contact.png" width="165" height="280">|<img alt="" src="./docs/assets/add_contact_name.png" width="165" height="280">|<img alt="" src="./docs/assets/add_contact_phone.png" width="165" height="280">|
+
+
+## Sample SMS Recieved
+
+<img src="./docs/assets/myLastKnownLocation.jpg" alt="MyLastKnownLocation" width="360" height="150">
 
 ## Nerd
 - App uses **Java Thread** concept to run Timer & send SMS seperately from main thread.
@@ -33,4 +33,4 @@
 ## Work Remaining
 - Send Custom message as set in settings page.
 
-### Any new ideas or updates are always welcome 🤗!
+### Any new ideas or updates are always welcome !
