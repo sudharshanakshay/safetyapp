@@ -106,17 +106,22 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-    private void hasPermission(Context context){
+    private boolean hasPermission(String[] permissions){
+
+             for (String permission : permissions) {
+                 if(ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) return false;
+             }
+
+             return true;
 
     }
 
     private void initiatePermissionRequest() {
 
         int permissionsCode = 51;
-        String[] permission = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION};
+        String[] permissions = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION};
 
-        ActivityCompat.requestPermissions(this, permission, permissionsCode);
-
+        if(!hasPermission(permissions)) ActivityCompat.requestPermissions(this, permissions, permissionsCode);
 
 //
 //        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
