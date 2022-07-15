@@ -18,16 +18,16 @@
 |  |  | |
 |:-------------------------:|:-------------------------:|:-------------------------:|
 | Home Page | Emergency Initiated|Terminate SMS |
-| <img alt="" src="./docs/assets/home_page.png" width="165" height="280"> |<img alt="" src="./docs/assets/send_sms.png" width="165" height="280">|<img alt="" src="./docs/assets/cancel_send_sms.png" width="165" height="280">|
+| <img alt="" src="./docs/assets/home_page.png" width="162" height="280"> |<img alt="" src="./docs/assets/send_sms.png" width="162" height="280">|<img alt="" src="./docs/assets/cancel_send_sms.png" width="162" height="280">|
 |  Display Contact | Save Contact | Save Contact |
-|<img alt="" src="./docs/assets/display_contact.png" width="165" height="280">|<img alt="" src="./docs/assets/add_contact_name.png" width="165" height="280">|<img alt="" src="./docs/assets/add_contact_phone.png" width="165" height="280">|
+|<img alt="" src="./docs/assets/display_contact.png" width="162" height="280">|<img alt="" src="./docs/assets/add_contact_name.png" width="162" height="280">|<img alt="" src="./docs/assets/add_contact_phone.png" width="162" height="280">|
 
 
 ## Sample SMS Recieved
 
-<img src="./docs/assets/myLastKnownLocation.jpg" alt="MyLastKnownLocation" width="360" height="150">
+<img src="./docs/assets/myLastKnownLocation.jpg" alt="MyLastKnownLocation"  width="162" height="280" >
 
-## Nerd
+## For Nerd
 - App uses **Java Thread** concept to run Timer & send SMS seperately from main thread.
 
 ## Work Remaining
