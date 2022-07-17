@@ -15,22 +15,35 @@
 
 ## Screenshots of SafetyApp
 
-|  |  | |
-|:-------------------------:|:-------------------------:|:-------------------------:|
-| Home Page | Emergency Initiated|Terminate SMS |
-| <img alt="" src="./docs/assets/home_page.png" width="162" height="280"> |<img alt="" src="./docs/assets/send_sms.png" width="162" height="280">|<img alt="" src="./docs/assets/cancel_send_sms.png" width="162" height="280">|
-|  Display Contact | Save Contact | Save Contact |
-|<img alt="" src="./docs/assets/display_contact.png" width="162" height="280">|<img alt="" src="./docs/assets/add_contact_name.png" width="162" height="280">|<img alt="" src="./docs/assets/add_contact_phone.png" width="162" height="280">|
+<div style="display:block; float:left;">
+  <img alt="" src="./docs/assets/home_page.png" width="200" >
+  <img alt="" src="./docs/assets/send_sms.png" width="200" >
+  <img alt="" src="./docs/assets/cancel_send_sms.png" width="200" >
+</div>
 
+<div style="display:block; float:left;">
+  <img alt="" src="./docs/assets/display_contact.png" width="200" >
+  <img alt="" src="./docs/assets/add_contact_name.png" width="200" >
+  <img alt="" src="./docs/assets/add_contact_phone.png" width="200" >
+</div>
+
+<div style="display:block; float:left;">
 
 ## Sample SMS Recieved
+ <div style="width:200">
+  <img src="./docs/assets/myLastKnownLocation.jpg" alt="MyLastKnownLocation" width="200" >
+</div>
 
-<img src="./docs/assets/myLastKnownLocation.jpg" alt="MyLastKnownLocation"  width="162" height="280" >
+<div style="display:block; float:left;">
 
-## For Nerd
+## Nerd
 - App uses **Java Thread** concept to run Timer & send SMS seperately from main thread.
 
 ## Work Remaining
 - Send Custom message as set in settings page.
 
 ### Any new ideas or updates are always welcome !
+</div>
+
+
+
